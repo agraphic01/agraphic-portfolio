@@ -132,41 +132,91 @@
         
         .portfolio {
             padding: 80px 0;
-            background: white;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
         
         .portfolio h2 {
             text-align: center;
-            font-size: 36px;
-            margin-bottom: 50px;
-            color: #667eea;
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .portfolio-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 18px;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
         }
         
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
         }
         
         .portfolio-item {
             position: relative;
             overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            background: #000;
+        }
+        
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 1;
+        }
+        
+        .portfolio-item:hover::before {
+            opacity: 1;
         }
         
         .portfolio-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
         }
         
         .portfolio-item img {
             width: 100%;
-            height: 400px;
+            height: 450px;
             object-fit: cover;
             display: block;
+            transition: transform 0.5s;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
         }
         
         .portfolio-overlay {
@@ -174,11 +224,12 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 70%, transparent 100%);
             color: white;
-            padding: 30px 20px 20px;
-            transform: translateY(100%);
-            transition: transform 0.3s;
+            padding: 40px 25px 25px;
+            transform: translateY(calc(100% - 80px));
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
         }
         
         .portfolio-item:hover .portfolio-overlay {
@@ -186,13 +237,46 @@
         }
         
         .portfolio-overlay h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
+            font-size: 26px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
         }
         
         .portfolio-overlay p {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s 0.1s;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .portfolio-item:hover .portfolio-overlay p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .portfolio-tag {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 10px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s 0.2s;
+        }
+        
+        .portfolio-item:hover .portfolio-tag {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .services {
@@ -359,14 +443,22 @@
                 font-size: 18px;
             }
             
-            .portfolio-grid,
-            .services-grid,
-            .skills-grid {
+            .portfolio-grid {
                 grid-template-columns: 1fr;
+                gap: 30px;
             }
             
             .portfolio-item img {
-                height: 300px;
+                height: 350px;
+            }
+            
+            .portfolio h2 {
+                font-size: 32px;
+            }
+            
+            .services-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -406,34 +498,39 @@
 
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2>Portfolio</h2>
+            <h2>Featured Work</h2>
+            <p class="portfolio-subtitle">Explore our latest creative projects and design solutions</p>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/7d6f6247-27a1-4730-a585-f9e239f7dc77/2025-11-30T06-18-16-850Z-98228f9b-chat-image-1764483496828-0.jpeg.jpg" alt="Black Friday Wireless Mouse Campaign">
                     <div class="portfolio-overlay">
                         <h3>Black Friday Campaign</h3>
-                        <p>Product advertising design for wireless mouse with dramatic stadium backdrop and promotional offer</p>
+                        <p>Dynamic product advertising design featuring wireless mouse with dramatic stadium backdrop and compelling promotional offer. Created to maximize engagement during peak shopping season.</p>
+                        <span class="portfolio-tag">Product Design</span>
                     </div>
                 </div>
                 <div class="portfolio-item">
                     <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/7d6f6247-27a1-4730-a585-f9e239f7dc77/2025-11-30T06-18-18-147Z-c6883ebe-chat-image-1764483498128-1.jpeg.jpg" alt="Genex Health Insurance">
                     <div class="portfolio-overlay">
                         <h3>Genex Health Insurance</h3>
-                        <p>Healthcare branding with professional medical imagery and clean corporate design</p>
+                        <p>Professional healthcare branding with clean corporate design, medical imagery, and trust-building visual elements. Designed to communicate reliability and care.</p>
+                        <span class="portfolio-tag">Healthcare Branding</span>
                     </div>
                 </div>
                 <div class="portfolio-item">
                     <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/7d6f6247-27a1-4730-a585-f9e239f7dc77/2025-11-30T06-18-28-039Z-1cb78d70-chat-image-1764483508013-2.jpeg.jpg" alt="WaterX Hair Product">
                     <div class="portfolio-overlay">
                         <h3>WaterX Hair Care</h3>
-                        <p>Luxury hair product advertisement with elegant typography and premium product photography</p>
+                        <p>Luxury hair product advertisement featuring elegant typography, premium product photography, and sophisticated lighting. Designed to convey quality and exclusivity.</p>
+                        <span class="portfolio-tag">Luxury Product</span>
                     </div>
                 </div>
                 <div class="portfolio-item">
                     <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/7d6f6247-27a1-4730-a585-f9e239f7dc77/2025-11-30T06-18-28-158Z-aae08c6b-chat-image-1764483508138-3.jpeg.jpg" alt="Skiano Skincare">
                     <div class="portfolio-overlay">
                         <h3>Skiano Skincare</h3>
-                        <p>Natural skincare product branding with organic aesthetic and 100% natural positioning</p>
+                        <p>Natural skincare product branding with organic aesthetic, earthy tones, and 100% natural positioning. Emphasizes purity and environmental consciousness.</p>
+                        <span class="portfolio-tag">Natural Beauty</span>
                     </div>
                 </div>
             </div>
