@@ -130,8 +130,74 @@
             margin-top: 20px;
         }
         
+        .portfolio {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .portfolio h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #667eea;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 30px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+        
+        .portfolio-overlay h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        
+        .portfolio-overlay p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
         .services {
             padding: 80px 0;
+            background: #f8f9fa;
         }
         
         .services h2 {
@@ -174,7 +240,7 @@
         
         .skills {
             padding: 80px 0;
-            background: #f8f9fa;
+            background: white;
         }
         
         .skills h2 {
@@ -193,7 +259,7 @@
         }
         
         .skill-item {
-            background: white;
+            background: #f8f9fa;
             padding: 30px;
             border-radius: 10px;
             text-align: center;
@@ -293,9 +359,14 @@
                 font-size: 18px;
             }
             
+            .portfolio-grid,
             .services-grid,
             .skills-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .portfolio-item img {
+                height: 300px;
             }
         }
     </style>
@@ -307,6 +378,7 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -329,6 +401,42 @@
             <h2>About Agraphic</h2>
             <p>Agraphic is a creative design studio specializing in brand identity and visual communication. We transform ideas into stunning visuals that make your brand stand out. With expertise in Adobe Photoshop and Illustrator, we deliver professional design solutions tailored to your needs.</p>
             <p class="location">📍 Based in Delhi NCR</p>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>Portfolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/7d6f6247-27a1-4730-a585-f9e239f7dc77/2025-11-30T06-18-16-850Z-98228f9b-chat-image-1764483496828-0.jpeg.jpg" alt="Black Friday Wireless Mouse Campaign">
+                    <div class="portfolio-overlay">
+                        <h3>Black Friday Campaign</h3>
+                        <p>Product advertising design for wireless mouse with dramatic stadium backdrop and promotional offer</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/7d6f6247-27a1-4730-a585-f9e239f7dc77/2025-11-30T06-18-18-147Z-c6883ebe-chat-image-1764483498128-1.jpeg.jpg" alt="Genex Health Insurance">
+                    <div class="portfolio-overlay">
+                        <h3>Genex Health Insurance</h3>
+                        <p>Healthcare branding with professional medical imagery and clean corporate design</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/7d6f6247-27a1-4730-a585-f9e239f7dc77/2025-11-30T06-18-28-039Z-1cb78d70-chat-image-1764483508013-2.jpeg.jpg" alt="WaterX Hair Product">
+                    <div class="portfolio-overlay">
+                        <h3>WaterX Hair Care</h3>
+                        <p>Luxury hair product advertisement with elegant typography and premium product photography</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/7d6f6247-27a1-4730-a585-f9e239f7dc77/2025-11-30T06-18-28-158Z-aae08c6b-chat-image-1764483508138-3.jpeg.jpg" alt="Skiano Skincare">
+                    <div class="portfolio-overlay">
+                        <h3>Skiano Skincare</h3>
+                        <p>Natural skincare product branding with organic aesthetic and 100% natural positioning</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
